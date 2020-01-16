@@ -1,0 +1,13 @@
+#!/usr/bin/env node
+
+/*
+choose one
+  #!/usr/bin/env babel-node
+  #!/usr/bin/env node
+*/
+
+const dotEnvSafe = require('dotenv-safe');
+dotEnvSafe.config({
+  allowEmptyValues: true,
+  example: `${__dirname}/../../.env.example`,
+});
