@@ -20,3 +20,6 @@
 
 ## dotenv-safe
 - diff validate ".env" and ".env.example"
+
+## apidoc
+- 產生 api document 文件

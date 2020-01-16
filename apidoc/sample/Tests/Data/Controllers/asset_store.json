@@ -1,0 +1,16 @@
+{
+  "data": {
+    "name": "asset store",
+    "app_integration_id": 2,
+    "config": {
+      "subject": "test subject",
+      "template_id": "d-ea5dbc6e08254d05bbb6bc3cb7ba1f79",
+      "bee": {
+        "setting": {}
+      }
+    }
+  },
+  "meta": {
+    "bee_html": "<div>bee store</div>"
+  }
+}
