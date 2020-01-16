@@ -1,0 +1,14 @@
+{
+  "name": "API Doc",
+  "version": "0.1.0",
+  "description": "",
+  "title": "API Doc",
+  "url": "http://127.0.0.1:3000",
+  "order": [
+    "list",
+    "show",
+    "store",
+    "update",
+    "delete"
+  ]
+}
