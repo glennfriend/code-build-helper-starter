@@ -17,3 +17,6 @@
 
 ## composer
 - 
+
+## dotenv-safe
+- diff validate ".env" and ".env.example"
