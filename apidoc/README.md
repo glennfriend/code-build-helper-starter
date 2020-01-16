@@ -16,7 +16,11 @@
 ```
 
 ## test only
+```
 apidoc -i ./sample/ -o ./public/apidoc
 php -S 127.0.0.1:8008 -t public/apidoc
 google-chrome http://127.0.0.1:8008/apidoc/
+```
 
+## Future plans
+- deploy to gh-pages by github page
