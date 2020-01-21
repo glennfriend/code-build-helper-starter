@@ -4,6 +4,7 @@
 - 比對專案裡面 .env 與 .env.example 的差異並且提醒 developer
 
 ## install
+- npm install --save dotenv-safe
 - yarn add dotenv-safe
 
 ## vi package.json
