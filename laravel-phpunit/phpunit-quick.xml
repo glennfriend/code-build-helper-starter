@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit backupGlobals="false"
+         backupStaticAttributes="false"
+         bootstrap="vendor/autoload.php"
+         colors="true"
+         convertErrorsToExceptions="true"
+         convertNoticesToExceptions="true"
+         convertWarningsToExceptions="true"
+         processIsolation="false"
+         stopOnFailure="false">
+    <testsuites>
+        <testsuite name="Special">
+            <directory suffix="Test.php">./tests/Special</directory>
+            <!--
+                NOTE:
+                    操作 table data 的時候使用 DatabaseTransactions 有最快的速度
+                    但是該方法 "不會" 建立 migration
+                    所以你必須在一開始的使用使用 RefreshDatabase
+                    以避免 database schema 有任何變動的時候造成莫名奇妙的情況
+
+                    這裡規避了該檔案
+                    也就是 RefreshDatabase 這個行為
+
+                    使用的時機為
+                    進行 migration 之後第一次使用
+                        phpunit.xml
+                    第二次之後都使用
+                        phpunit-quick.xml
+            -->
+            <exclude>./tests/Special/RefreshDatabaseTest.php</exclude>
+        </testsuite>
+        <testsuite name="Feature">
+            <directory suffix="Test.php">./tests/Feature</directory>
+        </testsuite>
+        <testsuite name="Unit">
+            <directory suffix="Test.php">./tests/Unit</directory>
+        </testsuite>
+        <testsuite name="Modules">
+            <directory suffix="Test.php">./Modules/**/Tests/**</directory>
+        </testsuite>
+        <testsuite name="Modules-Feature">
+            <directory suffix="Test.php">./Modules/**/Tests/Feature/**</directory>
+        </testsuite>
+        <testsuite name="Modules-Unit">
+            <directory suffix="Test.php">./Modules/**/Tests/Unit/**</directory>
+        </testsuite>
+        <testsuite name="Packages">
+            <directory suffix="Test.php">./packages/**/tests</directory>
+            <directory suffix="Test.php">./packages/**/tests/**</directory>
+        </testsuite>
+    </testsuites>
+    <filter>
+        <whitelist processUncoveredFilesFromWhitelist="true">
+            <directory suffix=".php">./app</directory>
+            <directory suffix=".php">./Modules</directory>
+            <directory suffix=".php">./packages</directory>
+            <exclude>
+                <directory suffix=".php">./Modules/**/Console</directory>
+                <directory suffix=".php">./Modules/**/Database</directory>
+                <directory suffix=".php">./Modules/**/Routes</directory>
+                <directory suffix=".php">./Modules/**/Resources</directory>
+                <directory suffix=".php">./Modules/**/Tests</directory>
+            </exclude>
+        </whitelist>
+    </filter>
+    <php>
+        <env name="APP_ENV" value="testing"/> <!-- see .env.testing -->
+        <env name="CACHE_DRIVER" value="array"/>
+        <env name="SESSION_DRIVER" value="array"/>
+        <env name="QUEUE_DRIVER" value="sync"/>
+        <env name="MAIL_DRIVER" value="array"/>
+        <!-- append -->
+        <env name="BCRYPT_ROUNDS" value="4"/>
+        <env name="REDIS_CLIENT" value="mock"/>
+    </php>
+</phpunit>
