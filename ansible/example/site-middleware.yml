@@ -1,0 +1,11 @@
+---
+
+- name: Deploy web server middleware and config
+  hosts: example-dev
+  vars:
+    nodejs_version: 11.13.0
+
+  roles:
+    - { role: angristan.base, tags: base }
+    - { role: angristan.nodejs, tags: nodejs }
+    - { role: angristan.yarn, tags: yarn }

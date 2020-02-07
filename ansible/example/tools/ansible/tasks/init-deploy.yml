@@ -1,0 +1,21 @@
+- name: init-deploy
+  debug:
+    msg:
+      - "====== init-deploy ======"
+      - "playbook_dir : {{ playbook_dir }}"
+      - "ansistrano_deploy_to: {{ ansistrano_deploy_to }}"
+      - "APP_NAME: {{ APP_NAME }}"
+      - "CI_BRANCH: {{ CI_BRANCH }}"
+
+
+
+
+- name: sleep 3
+  shell: sleep 3
+
+- name: save information to log
+  shell:
+      tools/ansible/env-info.sh > /tmp/ansible-system-info.log
+      # cat /tmp/ansible-system-info.log
+  args:
+    executable: /bin/bash

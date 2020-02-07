@@ -1,0 +1,47 @@
+- name: pre-deploy
+  debug: msg="====== pre-deploy ======"
+
+- name: laravel storage directories create
+  file:
+    path: "{{ ansistrano_shared_path }}/storage/{{ item }}"
+    state: directory
+    recurse: yes
+  with_items:
+    - app
+    - app/public
+    - logs
+    - framework
+    - framework/cache
+    - framework/sessions
+    - framework/views
+
+- name: laravel shared directories permissions
+  command: find {{ ansistrano_shared_path }} -type d -exec chmod 775 {} \;
+
+- name: laravel shared files permissions
+  command: find {{ ansistrano_shared_path }} -type f -exec chmod 664 {} \;
+
+#- name: (test only) delete composer.json
+#  shell:
+#    mv composer.json composer.happy ;
+#  args:
+#    chdir: "{{ ansistrano_deploy_to }}/current/"
+- name: (composer) composer install
+  composer:
+    command: install
+    working_dir: '{{ ansistrano_release_path.stdout }}'
+
+#- name: laravel migrate
+#  command: php {{ ansistrano_release_path.stdout }}/artisan migrate --force
+# or
+#- name: laravel migrate
+#  shell:
+#    # cd {{ ansistrano_deploy_to }}/current/ ;
+#    pwd ;
+#    php artisan migrate ;
+#  args:
+#    chdir: '{{ ansistrano_deploy_to }}/current/'
+
+- name: laravel rebuild object cache
+  command: php {{ ansistrano_release_path.stdout }}/artisan storage:link
+

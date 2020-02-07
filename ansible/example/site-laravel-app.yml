@@ -1,0 +1,66 @@
+---
+
+# for localhost
+- name: "env=localhost , description=laravel app"
+  hosts: 127.0.0.1
+  connection: local
+  vars_files:
+    - env.yml
+  vars:
+    ansistrano_deploy_to:  "/opt/www/{{ APP_NAME }}"
+    ansistrano_git_repo:   "{{ REPO }}"
+    ansistrano_deploy_via: git
+    ansistrano_keep_releases: 3
+    ansistrano_before_setup_tasks_file:   "tools/ansible/tasks/init-deploy.yml"
+    ansistrano_before_symlink_tasks_file: "tools/ansible/tasks/pre-deploy.yml"
+    ansistrano_after_symlink_tasks_file:  "tools/ansible/tasks/post-deploy.yml"
+    ansistrano_shared_paths:
+      - node_modules
+      - storage
+    ansistrano_shared_files:
+      - .env
+    CI_BRANCH: "master"
+
+
+  tasks:
+
+#    - debug: msg="==== start ===="
+
+#    - name: set DB_DATABASE
+#      lineinfile: dest=.env.example regexp='^DB_DATABASE=' line=DB_DATABASE=laravel
+#    - debug: msg="APP_NAME={{ DB_DATABASE }} by env.yml"
+
+    - name: aaa
+      shell: 
+        echo date
+        echo 'hello world 2'
+      args:
+        executable: /bin/bash
+
+    - name: ccc
+      shell:
+        echo 123
+
+#
+#   - name: Check package.json file
+#     stat:
+#       path: "{{ ansistrano_release_path.stdout }}/package.json"
+#     register: project_npm
+#
+#   - name: Run npm install
+#     npm:
+#       path: "{{ ansistrano_release_path.stdout }}"
+#     when: project_npm.stat.exists
+#
+#   - name: "Check if .env exists locally"
+#     local_action: stat path=".env"
+#     register: result
+#
+#   - name: "Check if .env.example exists locally"
+#     local_action: stat path=".env.example"
+#     register: result
+
+
+  roles:
+   - { role: ansistrano.deploy, tags: deploy }
+#   - { role: geerlingguy.composer }  # remove it

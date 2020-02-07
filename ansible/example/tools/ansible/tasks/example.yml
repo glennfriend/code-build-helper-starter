@@ -1,0 +1,49 @@
+################################################################################
+- name: test only
+  vars_files:
+    - env.yml   # 注意路徑
+  vars:
+    env_contents: "{{ lookup('file', '.env') }}"
+
+- name: test only
+  debug:
+    msg:
+      - ".env => "
+      - "{{ env_contents.split('\n') | to_nice_json }}"
+
+################################################################################
+- name: Print some debug information 
+  vars: 
+    msg: |
+        Module Variables ("vars"):
+        --------------------------------
+        {{ vars | to_nice_json }} 
+
+        Environment Variables ("environment"):
+        --------------------------------
+        {{ environment | to_nice_json }} 
+
+        GROUP NAMES Variables ("group_names"):
+        --------------------------------
+        {{ group_names | to_nice_json }}
+
+        GROUPS Variables ("groups"):
+        --------------------------------
+        {{ groups | to_nice_json }}
+
+        HOST Variables ("hostvars"):
+        --------------------------------
+        {{ hostvars | to_nice_json }} 
+
+  debug: 
+    msg: "{{ msg.split('\n') }}"       
+  tags: debug_info
+
+
+################################################################################
+  - name: 建立一個目錄
+    file:
+      state: directory
+      path: "{{ ansistrano_deploy_to }}/just-test-folder/"
+
+
