@@ -6,6 +6,7 @@
          convertErrorsToExceptions="true"
          convertNoticesToExceptions="true"
          convertWarningsToExceptions="true"
+         printerClass="Sempro\PHPUnitPrettyPrinter\PrettyPrinter"
          processIsolation="false"
          stopOnFailure="false">
     <testsuites>
@@ -70,6 +71,7 @@
         <env name="QUEUE_DRIVER" value="sync"/>
         <env name="MAIL_DRIVER" value="array"/>
         <!-- append -->
+        <env name="LOG_CHANNEL" value="test"/>
         <env name="BCRYPT_ROUNDS" value="4"/>
         <env name="REDIS_CLIENT" value="mock"/>
     </php>

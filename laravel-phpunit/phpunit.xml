@@ -6,11 +6,29 @@
          convertErrorsToExceptions="true"
          convertNoticesToExceptions="true"
          convertWarningsToExceptions="true"
+         printerClass="Sempro\PHPUnitPrettyPrinter\PrettyPrinter"
          processIsolation="false"
          stopOnFailure="false">
     <testsuites>
         <testsuite name="Special">
             <directory suffix="Test.php">./tests/Special</directory>
+            <!--
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            -->
         </testsuite>
         <testsuite name="Feature">
             <directory suffix="Test.php">./tests/Feature</directory>
@@ -53,6 +71,7 @@
         <env name="QUEUE_DRIVER" value="sync"/>
         <env name="MAIL_DRIVER" value="array"/>
         <!-- append -->
+        <env name="LOG_CHANNEL" value="test"/>
         <env name="BCRYPT_ROUNDS" value="4"/>
         <env name="REDIS_CLIENT" value="mock"/>
     </php>
