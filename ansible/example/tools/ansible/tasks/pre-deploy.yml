@@ -1,6 +1,7 @@
 - name: pre-deploy
   debug: msg="====== pre-deploy ======"
 
+
 - name: laravel storage directories create
   file:
     path: "{{ ansistrano_shared_path }}/storage/{{ item }}"

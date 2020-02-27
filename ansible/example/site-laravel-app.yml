@@ -11,9 +11,10 @@
     ansistrano_git_repo:   "{{ REPO }}"
     ansistrano_deploy_via: git
     ansistrano_keep_releases: 3
-    ansistrano_before_setup_tasks_file:   "tools/ansible/tasks/init-deploy.yml"
-    ansistrano_before_symlink_tasks_file: "tools/ansible/tasks/pre-deploy.yml"
-    ansistrano_after_symlink_tasks_file:  "tools/ansible/tasks/post-deploy.yml"
+    ansistrano_before_setup_tasks_file:       "tools/ansible/tasks/init.yml"
+    ansistrano_after_update_code_tasks_file:  "tools/ansible/tasks/pull-after.yml"
+    ansistrano_before_symlink_tasks_file:     "tools/ansible/tasks/pre-deploy.yml"
+    ansistrano_after_symlink_tasks_file:      "tools/ansible/tasks/post-deploy.yml"
     ansistrano_shared_paths:
       - node_modules
       - storage

@@ -1,13 +1,11 @@
-- name: init-deploy
+- name: init
   debug:
     msg:
-      - "====== init-deploy ======"
+      - "====== init ======"
       - "playbook_dir : {{ playbook_dir }}"
       - "ansistrano_deploy_to: {{ ansistrano_deploy_to }}"
       - "APP_NAME: {{ APP_NAME }}"
       - "CI_BRANCH: {{ CI_BRANCH }}"
-
-
 
 
 - name: sleep 3

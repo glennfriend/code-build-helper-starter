@@ -1,0 +1,15 @@
+- name: pull-after
+  debug:
+    msg:
+      - "====== pull-after ======"
+
+
+
+# [fail]
+#- name: Create ".env" if not exists
+#  stat:
+#    path: "{{ ansistrano_deploy_to }}/shared/.env"
+#  register: result
+#
+#- commannd: touch "{{ ansistrano_deploy_to }}/shared/.env"
+#  when: result.stat.exists == false
