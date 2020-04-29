@@ -1,0 +1,31 @@
+---
+
+- name: "env=staging  , APP_NAME={{ APP_NAME }}, CI_BRANCH={{ CI_BRANCH }}"
+  hosts: deploy-staging
+  vars_files:
+    - env.yml
+  vars:
+    CI_BRANCH:                                "master"
+    ansistrano_deploy_to:                     "{{ DEPLOY_TO }}"
+    ansistrano_git_repo:                      "{{ REPO }}"
+    ansistrano_git_branch:                    "{{ CI_BRANCH }}"
+    ansistrano_git_identity_key_path:         "{{ GIT_IDENTITY_KEY_PATH }}"
+    ansistrano_deploy_via:                    git
+    ansistrano_keep_releases:                 3
+    ansistrano_before_setup_tasks_file:       "tools/ansible/tasks/init.yml"
+    ansistrano_after_update_code_tasks_file:  "tools/ansible/tasks/pull-after.yml"
+    ansistrano_before_symlink_tasks_file:     "tools/ansible/tasks-for-docker/pre-deploy.yml"
+    ansistrano_after_symlink_tasks_file:      "tools/ansible/tasks/post-deploy.yml"
+    ansistrano_shared_paths:
+      - node_modules
+      - storage
+    ansistrano_shared_files:
+      - .env
+
+
+  tasks:
+
+
+  roles:
+   - { role: ansistrano.deploy, tags: deploy }
+

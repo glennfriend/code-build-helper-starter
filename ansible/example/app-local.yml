@@ -1,16 +1,17 @@
 ---
 
-# for localhost
-- name: "env=localhost , description=laravel app"
-  hosts: 127.0.0.1
-  connection: local
+- name: "env=localhost, APP_NAME={{ APP_NAME }}, CI_BRANCH={{ CI_BRANCH }}"
+  hosts: deploy-local
   vars_files:
     - env.yml
   vars:
-    ansistrano_deploy_to:  "/opt/www/{{ APP_NAME }}"
-    ansistrano_git_repo:   "{{ REPO }}"
-    ansistrano_deploy_via: git
-    ansistrano_keep_releases: 3
+    CI_BRANCH:                                "master"
+    ansistrano_deploy_to:                     "{{ DEPLOY_TO }}"
+    ansistrano_git_repo:                      "{{ REPO }}"
+    ansistrano_git_branch:                    "{{ CI_BRANCH }}"
+    ansistrano_git_identity_key_path:         ""
+    ansistrano_deploy_via:                    git
+    ansistrano_keep_releases:                 3
     ansistrano_before_setup_tasks_file:       "tools/ansible/tasks/init.yml"
     ansistrano_after_update_code_tasks_file:  "tools/ansible/tasks/pull-after.yml"
     ansistrano_before_symlink_tasks_file:     "tools/ansible/tasks/pre-deploy.yml"
@@ -20,7 +21,6 @@
       - storage
     ansistrano_shared_files:
       - .env
-    CI_BRANCH: "master"
 
 
   tasks:
@@ -64,4 +64,4 @@
 
   roles:
    - { role: ansistrano.deploy, tags: deploy }
-#   - { role: geerlingguy.composer }  # remove it
+   # @see https://github.com/ansistrano/deploy

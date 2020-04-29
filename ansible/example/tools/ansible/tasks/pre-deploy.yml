@@ -27,10 +27,14 @@
 #    mv composer.json composer.happy ;
 #  args:
 #    chdir: "{{ ansistrano_deploy_to }}/current/"
+
 - name: (composer) composer install
   composer:
     command: install
     working_dir: '{{ ansistrano_release_path.stdout }}'
+
+- name: laravel rebuild object cache
+  command: php {{ ansistrano_release_path.stdout }}/artisan storage:link
 
 #- name: laravel migrate
 #  command: php {{ ansistrano_release_path.stdout }}/artisan migrate --force
@@ -43,6 +47,7 @@
 #  args:
 #    chdir: '{{ ansistrano_deploy_to }}/current/'
 
-- name: laravel rebuild object cache
-  command: php {{ ansistrano_release_path.stdout }}/artisan storage:link
+- name: laravel migrate
+  shell: |
+    php artisan migrate # --force
 
