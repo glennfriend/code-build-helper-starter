@@ -16,11 +16,10 @@
     - framework/sessions
     - framework/views
 
-- name: laravel shared directories permissions
-  command: find {{ ansistrano_shared_path }} -type d -exec chmod 775 {} \;
-
-- name: laravel shared files permissions
-  command: find {{ ansistrano_shared_path }} -type f -exec chmod 664 {} \;
+- name: laravel shared directories & files permissions
+  shell: |
+    find {{ ansistrano_shared_path }} -type d -exec chmod 775 {} \;
+    find {{ ansistrano_shared_path }} -type f -exec chmod 664 {} \;
 
 - name: composer install (docker)
   shell: |
@@ -36,4 +35,13 @@
   shell: |
     cd {{ ansistrano_release_path.stdout }}
     docker exec fs-marketing-tool_php7_1 php artisan migrate # --force
-    
+
+- name: supervisor
+  become: yes
+  shell: service supervisor reload
+# [fail]
+# - name: supervisor
+#   service:
+#     name: supervisor
+#     state: restarted
+

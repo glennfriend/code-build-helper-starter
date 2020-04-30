@@ -1,6 +1,6 @@
 ---
 
-- name: "env=localhost, APP_NAME={{ APP_NAME }}, CI_BRANCH={{ CI_BRANCH }}"
+- name: "localhost  ({{ CI_BRANCH }}) -> {{ DEPLOY_TO }}"
   hosts: deploy-local
   vars_files:
     - env.yml
@@ -12,10 +12,10 @@
     ansistrano_git_identity_key_path:         ""
     ansistrano_deploy_via:                    git
     ansistrano_keep_releases:                 3
-    ansistrano_before_setup_tasks_file:       "tools/ansible/tasks/init.yml"
-    ansistrano_after_update_code_tasks_file:  "tools/ansible/tasks/pull-after.yml"
-    ansistrano_before_symlink_tasks_file:     "tools/ansible/tasks/pre-deploy.yml"
-    ansistrano_after_symlink_tasks_file:      "tools/ansible/tasks/post-deploy.yml"
+    ansistrano_before_setup_tasks_file:       "tasks/init.yml"
+    ansistrano_after_update_code_tasks_file:  "tasks/pull-after.yml"
+    ansistrano_before_symlink_tasks_file:     "tasks/pre-deploy.yml"
+    ansistrano_after_symlink_tasks_file:      "tasks/post-deploy.yml"
     ansistrano_shared_paths:
       - node_modules
       - storage
@@ -32,7 +32,7 @@
 #    - debug: msg="APP_NAME={{ DB_DATABASE }} by env.yml"
 
     - name: aaa
-      shell: 
+      shell:
         echo date
         echo 'hello world 2'
       args:

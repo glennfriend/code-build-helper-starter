@@ -1,0 +1,3 @@
+- import_playbook: app-{{ env }}.yml
+  when:
+    - env is defined and (env == 'local' or env == 'staging' or env == 'production')

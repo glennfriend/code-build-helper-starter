@@ -16,11 +16,14 @@
     - framework/sessions
     - framework/views
 
-- name: laravel shared directories permissions
-  command: find {{ ansistrano_shared_path }} -type d -exec chmod 775 {} \;
-
-- name: laravel shared files permissions
-  command: find {{ ansistrano_shared_path }} -type f -exec chmod 664 {} \;
+#- name: laravel shared directories permissions
+#  command: find {{ ansistrano_shared_path }} -type d -exec chmod 775 {} \;
+#- name: laravel shared files permissions
+#  command: find {{ ansistrano_shared_path }} -type f -exec chmod 664 {} \;
+- name: laravel shared directories & files permissions
+  shell: |
+    find {{ ansistrano_shared_path }} -type d -exec chmod 775 {} \;
+    find {{ ansistrano_shared_path }} -type f -exec chmod 664 {} \;
 
 #- name: (test only) delete composer.json
 #  shell:

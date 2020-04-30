@@ -2,21 +2,24 @@
   debug:
     msg:
       - "====== init ======"
+      - "env                  : {{ env }}"
       - "playbook_dir         : {{ playbook_dir }}"
       - "ansistrano_deploy_to : {{ ansistrano_deploy_to }}"
       - "CI_BRANCH            : {{ CI_BRANCH }}"
       - "STAGING_HOST         : {{ STAGING_HOST }}"
       - "PRODUCTION_HOST      : {{ PRODUCTION_HOST }}"
+      #-"ansible_distribution : {{ ansible_distribution }}"
 
-
+#
 - name: sleep 3
   shell: sleep 3
 
-## remote 沒有這個檔案, 無法使用該方式
+## 如果 remote 沒有這個檔案, 無法使用該方式
 - name: save information to log
   shell:
-      tools/ansible/env-info.sh > /tmp/ansible-system-info.log
-      # cat /tmp/ansible-system-info.log
+      scripts/env-info.sh > /tmp/ansible.log
+      # cat /tmp/ansible.log
   args:
     executable: /bin/bash
   delegate_to: 127.0.0.1
+
