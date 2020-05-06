@@ -4,12 +4,18 @@
       - "====== pull-after ======"
 
 
+#- name: create link to shared
+#  shell: |
+#    ln -s {{ ansistrano_shared_path }}/.env                {{ ansistrano_release_path.stdout }}/.env
+#    ln -s {{ ansistrano_shared_path }}/google_ads_php.ini  {{ ansistrano_release_path.stdout }}/google_ads_php.ini
+#    ln -s {{ ansistrano_shared_path }}/adsapi_php.ini      {{ ansistrano_release_path.stdout }}/adsapi_php.ini
+- name: create link to shared
+  file:
+    src:  "{{ ansistrano_shared_path }}/{{ item.src }}"
+    dest: "{{ ansistrano_release_path.stdout }}/{{ item.dest }}"
+    state: link
+  loop:
+    - { src: ".env",                dest: ".env" }
+    - { src: "google_ads_php.ini",  dest: "google_ads_php.ini" }
+    - { src: "adsapi_php.ini",      dest: "adsapi_php.ini" }
 
-# [fail]
-#- name: Create ".env" if not exists
-#  stat:
-#    path: "{{ ansistrano_deploy_to }}/shared/.env"
-#  register: result
-#
-#- commannd: touch "{{ ansistrano_deploy_to }}/shared/.env"
-#  when: result.stat.exists == false

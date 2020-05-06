@@ -11,6 +11,17 @@
       #-"ansible_distribution : {{ ansible_distribution }}"
 
 #
+#- name: try to print stdout
+#  shell: |
+#    cd ~/
+#    pwd
+#  register: message
+#- debug: 
+#    msg:
+#      - "{{ message.stdout }}"
+#      - "{{ message.stderr }}"
+
+#
 - name: sleep 3
   shell: sleep 3
 
