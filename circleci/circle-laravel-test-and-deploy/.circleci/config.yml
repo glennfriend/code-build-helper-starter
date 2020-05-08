@@ -1,0 +1,126 @@
+version: 2.1
+
+defaults: &defaults
+  working_directory: ~/app
+  docker:
+    - image: circleci/php:7.3.14
+      environment:
+        DB_PORT: 3306
+    - image: circleci/mysql:8.0
+      command:
+        --default-authentication-plugin=mysql_native_password
+        --character-set-server=utf8mb4
+        --collation-server=utf8mb4_general_ci
+      environment:
+        MYSQL_ROOT_PASSWORD: root
+        MYSQL_DATABASE: test-my-database
+  steps:
+    - build_and_test
+
+
+commands:
+  build_and_test:
+    description: "Build and test"
+    steps:
+      - checkout
+      - restore_cache:
+          key: dependency-cache-composer-{{ checksum "composer.lock" }}
+      - run:
+          name: Copy environment variables
+          command: |
+            cp tools/circleci/circleci.env  .env
+            cp google_ads_php.ini.example   google_ads_php.ini
+      - run:
+          name: Install php extensions
+          command: |
+            sudo docker-php-ext-configure pdo_mysql --with-pdo-mysql=mysqlnd
+            sudo docker-php-ext-install pcntl pdo_mysql
+      - run:
+          name: Install soap extension
+          command: |
+            sudo apt-get -yqq update
+            sudo apt-get -yqq install libxml2-dev
+            sudo docker-php-ext-install soap
+      - run:
+          name: Install exif extension
+          command: |
+            sudo apt-get -yqq update
+            sudo apt-get -yqq install exiftool
+            sudo docker-php-ext-install exif
+      - run:
+          name: Install composer packages
+          command: |
+            composer install
+      - save_cache:
+          key: dependency-cache-composer-{{ checksum "composer.lock" }}
+          paths:
+            - ~/app/vendor
+      - run:
+          name: Test
+          command: |
+            php artisan key:generate
+            php artisan migrate
+            composer test
+
+
+  deploy_to_server:
+    description: "Deploy"
+    steps:
+      - checkout
+      - restore_cache:
+          key: dependency-cache-python-1
+      - run:
+          name: fix 第一次 ssh 連繽時的詢問
+          command: |
+            ssh-keyscan 3.101.3.82 >> ~/.ssh/known_hosts
+      - run:
+          name: deploy before
+          command: |
+            sudo apt-get install -y python-pip
+            sudo pip install ansible
+            ansible-galaxy install -r tools/ansible-deploy/requirements.yml
+            cp --no-clobber tools/ansible-deploy/env.yml.example  tools/ansible-deploy/env.yml
+      - save_cache:
+          key: dependency-cache-python-1
+          paths:
+            - ~/
+      - deploy:
+          command: |
+            echo "---- debug ----"
+            pwd
+            echo "current branch = ${CIRCLE_BRANCH}"
+            echo "current tag    = ${CIRCLE_TAG}"
+
+            if [[ -n "${CIRCLE_TAG}" ]]; then
+              echo "deploy to production"
+              ansible-playbook tools/ansible-deploy/app.yml -e "CI_BRANCH=master" -e "env=production"
+            elif [[ "${CIRCLE_BRANCH}" == "master" ]]; then
+              echo "deploy to staging"
+              ansible-playbook tools/ansible-deploy/app.yml -e "CI_BRANCH=master" -e "env=staging"
+            fi
+
+
+
+
+jobs:
+
+  build:
+    <<: *defaults
+    steps:
+      - build_and_test
+
+  deploy_expand_production:
+    docker:
+      - image: circleci/python:3.8.2
+    steps:
+      - deploy_to_server
+
+
+workflows:
+  version: 2
+  build-deploy:
+    jobs:
+      - build
+      - deploy_expand_production:
+          requires:
+            - build
