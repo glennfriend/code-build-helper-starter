@@ -6,6 +6,7 @@
     - env.yml
   vars:
     CI_BRANCH:                                "master"
+    ansible_user:                             "ubuntu"
     ansistrano_deploy_to:                     "{{ DEPLOY_TO }}"
     ansistrano_git_repo:                      "{{ REPO }}"
     ansistrano_git_branch:                    "{{ CI_BRANCH }}"

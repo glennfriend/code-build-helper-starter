@@ -5,6 +5,7 @@
       - "env                  : {{ env }}"
       - "playbook_dir         : {{ playbook_dir }}"
       - "ansistrano_deploy_to : {{ ansistrano_deploy_to }}"
+      - "ansible_user         : {{ ansible_user }}"
       - "CI_BRANCH            : {{ CI_BRANCH }}"
       - "STAGING_HOST         : {{ STAGING_HOST }}"
       - "PRODUCTION_HOST      : {{ PRODUCTION_HOST }}"
