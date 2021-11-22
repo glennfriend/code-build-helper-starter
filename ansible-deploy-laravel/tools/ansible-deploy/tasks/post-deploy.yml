@@ -1,3 +1,16 @@
 - name: post-deploy
   debug: msg="====== post-deploy ======"
 
+#
+# 必須在檔案拉下來之後才有這個 script 可以執行
+# 所以 trigger 放在 post-deploy 是一個合適的時間點
+#
+#- name: execut script and print stdout
+#  shell: /usr/bin/env php {{ ansistrano_release_path.stdout }}/tools/ansible-deploy/scripts/output.php a=1 ab=2 > output.json
+#  register: message
+#- debug: 
+#    msg:
+#      - "{{ message.stdout }}"
+#      - "{{ message.stderr }}"
+      
+

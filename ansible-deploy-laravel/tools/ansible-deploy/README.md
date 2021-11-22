@@ -20,7 +20,7 @@ or
 clear && ansible-playbook tools/ansible-deploy/app.yml -e "CI_BRANCH=master" -e "env=local" ; cat /tmp/ansible.log
 ```
 
-## deploy to staging
+## deploy to staging  (used app-staging.yml)
 clear && ansible-playbook tools/ansible-deploy/app.yml -e "CI_BRANCH=master" -e "env=staging"
 
 ## deploy to production
