@@ -1,0 +1,13 @@
+{
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^3.4"
+    },
+    "scripts": {
+        "php-cs-fix": [
+            "php-cs-fixer --diff fix "
+        ],
+        "php-cs-fix-dry-run": [
+            "php-cs-fixer --dry-run --diff fix --using-cache=no "
+        ]
+    }
+}
