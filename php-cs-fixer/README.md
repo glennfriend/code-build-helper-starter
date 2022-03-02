@@ -39,6 +39,7 @@ phpstorm > Settings > Tools > External Tool > 建立你的指令
     Arguments:          --diff --using-cache=no fix $FilePathRelativeToProjectRoot$
     Working directory:  $ProjectFileDir$
     -> for 你個人, 全域的方式
+    -> 目前我用的方式
 
   [Tool Settings]
     Program:            COMPOSER='/home/ubuntu/tool/php-cs-fixer/composer.json' composer

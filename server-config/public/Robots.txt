@@ -1,0 +1,10 @@
+User-Agent: Googlebot
+User-Agent: Bingbot
+Crawl-delay: 0.1
+User-Agent: *
+Crawl-delay: 1
+
+
+
+
+# https://blog.longwin.com.tw/2021/12/robots-txt-crawl-delay-bot-2021/

@@ -31,7 +31,7 @@ $config
         '@PHPUnit75Migration:risky'        => true,
         '@PSR2'                            => true,
         '@PSR12'                           => true,
-        '@PhpCsFixer'                      => true,
+        '@PhpCsFixer'                      => true,     // 'aa' . 'bb'  ->  'aa'.'bb'
         '@PhpCsFixer:risky'                => true,
         'general_phpdoc_annotation_remove' => ['annotations' => ['expectedDeprecation']],
         'list_syntax'                      => ['syntax' => 'long'],

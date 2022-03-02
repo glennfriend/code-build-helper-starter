@@ -1,0 +1,11 @@
+# https://www.kernel.org/pub/software/scm/git/docs/gitattributes.html
+# export-ignore   作為發佈的檔案時, 忽略這些檔案
+#
+/.gitattributes     export-ignore
+/.gitignore         export-ignore
+/.editorconfig      export-ignore
+/.php-cs-fixer.php  export-ignore
+/docker-compose.yml export-ignore
+/phpunit.xml        export-ignore
+/tests              export-ignore
+
