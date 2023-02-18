@@ -37,9 +37,10 @@ $config
         'list_syntax'                      => ['syntax' => 'long'],
         'self_accessor'                    => true,                                 // 在當前類中使用 self 代替類名
         'standardize_not_equals'           => true,                                 // <> 取代為 !=
-        'binary_operator_spaces'           => ['default' => 'align_single_space'],  // 等號對齊、數字箭頭符號對齊
         'phpdoc_annotation_without_dot'    => false,    // @param 註解後面不要自動加上 . 符號
         'phpdoc_summary'                   => false,    // 文字 註解後面不要自動加上 . 符號
+        'binary_operator_spaces'           => ['default' => 'single_space'],        // 等號一律置左方
+      //'binary_operator_spaces'           => ['default' => 'align_single_space'],  // 等號對齊、數字箭頭符號對齊 -> 不符合 Kos 的規則
     ])
     ->setFinder($finder);
 

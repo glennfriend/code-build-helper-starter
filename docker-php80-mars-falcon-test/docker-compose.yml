@@ -1,0 +1,27 @@
+version: '3.7'
+
+services:
+
+  php80:
+    build: .
+    image: mydocker/fpm:8.0.16
+    container_name: php-80
+    volumes:
+      - ./:/var/www/html
+    working_dir: /var/www/html
+    ports:
+      - 4000:80
+    command:
+      >
+        sh -i -c -e
+        "
+        composer install;
+        php artisan migrate;
+        php artisan serve --host 0.0.0.0 --port 80;
+        "
+    networks:
+      - php80
+
+networks:
+  php80:
+

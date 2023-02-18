@@ -1,0 +1,29 @@
+version: 2.1
+
+commands:
+  build_and_test:
+    description: "Build and test"
+    steps:
+      - checkout
+      - run:
+          name: Run phpunit test coverage
+          command: |
+            if [[ "${CIRCLE_BRANCH}" == "master" ]]; then
+
+              # echo "DB_HOST = ${DB_HOST}"
+              # echo "DB_CONNECTION = ${DB_CONNECTION}"
+
+              # export DB_HOST=127.0.0.1
+              # export DB_USERNAME=root
+              # export DB_PASSWORD=root
+              # export DB_DATABASE=testing_db 
+              # export SCOUT_ELASTIC_HOST=http://localhost:9200
+
+              # cd /home/circleci/app
+              DB_CONNECTION=testing_mysql php artisan migrate --database=mysql_test
+              phpdbg -qrr vendor/bin/phpunit -d memory_limit=8G Modules/ --coverage-html build/coverage-report || true
+            fi
+          environment:
+            XDEBUG_MODE: coverage
+      - store_artifacts:
+          path: build/coverage-report

@@ -1,6 +1,7 @@
 /node_modules
 /storage/*.key
 /vendor
+/.DS_Store
 /.idea
 /.vscode
 npm-debug.log
@@ -10,4 +11,5 @@ yarn-error.log
 .php-cs-fixer.cache
 .php-cs-fixer.php
 .phpstorm.meta.php
+.phpunit.result.cache
 _ide_helper.php
