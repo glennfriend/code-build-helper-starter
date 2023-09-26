@@ -41,6 +41,10 @@ $config
         'phpdoc_summary'                   => false,    // 文字 註解後面不要自動加上 . 符號
         'binary_operator_spaces'           => ['default' => 'single_space'],        // 等號一律置左方
       //'binary_operator_spaces'           => ['default' => 'align_single_space'],  // 等號對齊、數字箭頭符號對齊 -> 不符合 Kos 的規則
+        'new_with_braces'                  => [ // Migration 的名稱, `return new class()` -> `return new class`
+            'named_class'     => false,
+            'anonymous_class' => false,
+        ],
     ])
     ->setFinder($finder);
 
