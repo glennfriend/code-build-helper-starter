@@ -1,0 +1,48 @@
+{
+    "scripts": {
+        "rector": [
+            "rector process"
+        ],
+        "rector:dry-run": [
+            "rector process --dry-run"
+        ],
+        "insights": [
+            "phpinsights"
+        ],
+        "insights:fix": [
+            "phpinsights fix"
+        ],
+        "phpcs:fix-pr": [
+            "tools/scripts/phpcs-fix.sh pr"
+        ],
+        "phpcs:fix-all": [
+            "PHP_CS_FIXER_IGNORE_ENV=true tools/scripts/phpcs-fix.sh all"
+        ],
+        "refactor": [
+            "composer rector",
+            "composer insights:fix",
+            "composer phpcs:fix-all"
+        ],
+        "refactor:dry-run": [
+            "composer rector:dry-run",
+            "composer insights"
+        ]
+    },
+    "require-dev": {
+        "fakerphp/faker": "^1.20",
+        "filp/whoops": "^2.14",
+        "friendsofphp/php-cs-fixer": "^3.22",
+        "mockery/mockery": "^1.5",
+        "nunomaduro/larastan": "^2.6",
+        "nunomaduro/phpinsights": "^2.8",
+        "onramplab/onr-phpcs-laravel": "^1.2",
+        "phpunit/phpunit": "10.2.3",
+        "rector/rector": "^0.17.0",
+        "sebastian/diff": "^5.0.0"
+    },
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
+    }
+}
