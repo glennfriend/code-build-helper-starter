@@ -45,6 +45,7 @@ $config
             'named_class'     => false,
             'anonymous_class' => false,
         ],
+        'php_unit_test_class_requires_covers' => false, // 測試程式不要加上 @coversNothing 標示, 會無法產 生測試覆蓋率 report
     ])
     ->setFinder($finder);
 

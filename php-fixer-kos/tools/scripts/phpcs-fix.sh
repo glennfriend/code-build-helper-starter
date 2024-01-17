@@ -1,6 +1,6 @@
 #!/bin/bash
-# NOTE: Sometimes when running php-cs-fixer again, it will fix some files again.
-#       So to try to run php-cs-fixer again unless you make sure there is no changes anymore.
+# NOTE: 有時再次執行 php-cs-fixer 時，它會再次修復一些檔案。
+# 所以嘗試再次運行 php-cs-fixer 除非你確保不再有任何更改。
 
 set -e
 

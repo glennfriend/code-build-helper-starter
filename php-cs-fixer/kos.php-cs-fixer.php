@@ -34,9 +34,10 @@ $config
         'php_unit_method_casing' => false,          // [我不使用該規則]  function test_my_code() -> function testMyCode()
         'no_trailing_comma_in_list_call' => true,   // [我不使用該規則]  如果由逗號分隔的值列表包含在一行中，則最後一項不得有尾隨逗號
         // glenn rewrite
-        'phpdoc_annotation_without_dot' => false,   // @param 註解後面不要自動加上 . 符號
-        'phpdoc_summary'                => false,   // 文字 註解後面不要自動加上 . 符號
-        'phpdoc_to_comment'             => false,   // 不要把 /** @var Class $class */ 轉成 // @var 格式
+        'phpdoc_annotation_without_dot'     => false,   // @param 註解後面不要自動加上 . 符號
+        'phpdoc_summary'                    => false,   // 文字 註解後面不要自動加上 . 符號
+        'phpdoc_to_comment'                 => false,   // 不要把 /** @var Class $class */ 轉成 // @var 格式
+        'php_unit_test_class_requires_covers' => false, // 測試程式不要加上 @coversNothing 標示, 會無法產 生測試覆蓋率 report
     ])
     ->setFinder($finder);
 

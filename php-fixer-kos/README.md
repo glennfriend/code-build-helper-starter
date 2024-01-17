@@ -32,3 +32,12 @@ composer insights:fix ${TARGET_PROJECT}
 ```
 composer phpcs:fix-all
 ```
+
+### remote php cs fixer (測試中)
+```
+
+vendor/bin/php-cs-fixer fix --diff
+  --config /target/folder/.php-cs-fixer.php
+  /target/folder/index.php
+
+```
