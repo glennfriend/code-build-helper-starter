@@ -1,0 +1,32 @@
+@startuml
+
+rectangle FacadeCommand     #779fae
+rectangle Command           #aec6cf
+rectangle Result            #cfcfc4 
+rectangle Event             #ffb853
+rectangle DomainEvent       #ffcb81
+rectangle IntegrationEvent  #ffdeaf
+rectangle Query             #62d862
+rectangle ReadModel         #77dd77
+rectangle UserInterface     #a2e8a2
+rectangle Aggregate         #fdfd9d
+rectangle Service           #fcfc78
+rectangle Policy            #b6a2db
+rectangle Saga              #c9bbe5
+rectangle Process           #ddd4ee
+rectangle Timer             #cfcfc4
+rectangle Person            #ffd1dc
+rectangle System            #ffd1dc
+rectangle Comment           #ffffff
+
+FacadeCommand   -down-> Command
+Result          --> Event
+DomainEvent     --> IntegrationEvent
+Query           --> ReadModel
+UserInterface   --> Aggregate
+Service         --> Policy
+Saga            --> Process
+Timer           --> Person
+System          --> Comment
+
+@enduml
