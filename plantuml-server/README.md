@@ -4,6 +4,10 @@
 
 - docker-compose up
 
+## upgrade docker image
+- https://hub.docker.com/r/plantuml/plantuml-server/tags
+- docker pull plantuml/plantuml-server:v1.2023.13
+
 ## vscode setting
 
 - vscode install "PlantUML" extension
@@ -16,5 +20,5 @@
 
 ## try for vscode
 
-- code test.pu
+- code example/test-c4.pu
 - Alt + D
