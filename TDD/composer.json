@@ -1,0 +1,58 @@
+{
+  "type": "project",
+  "description": "TDD",
+  "keywords": [],
+  "license": "MIT",
+  "require": {
+    "php": ">=8.1",
+    "laravel/framework": "^10.41",
+    "laravel/tinker": "^2.9"
+  },
+  "repositories": [],
+  "config": {
+    "optimize-autoloader": true,
+    "preferred-install": "dist",
+    "sort-packages": true,
+    "allow-plugins": {
+      "dealerdirect/phpcodesniffer-composer-installer": true,
+      "pestphp/pest-plugin": true,
+      "php-http/discovery": true
+    }
+  },
+  "extra": {
+    "laravel": {
+      "dont-discover": [
+        "barryvdh/laravel-ide-helper"
+      ]
+    }
+  },
+  "autoload": {
+    "psr-4": {
+      "App\\": "app/",
+      "Modules\\": "Modules/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\": "tests/"
+    }
+  },
+  "minimum-stability": "stable",
+  "prefer-stable": true,
+  "scripts": {
+    "test": [
+      "Composer\\Config::disableProcessTimeout",
+      "pest"
+    ]
+  },
+  "require-dev": {
+    "fakerphp/faker": "^1.23",
+    "filp/whoops": "^2.15",
+    "mockery/mockery": "^1.6",
+    "pestphp/pest": "^2.14",
+    "pestphp/pest-plugin-drift": "^2.3",
+    "pestphp/pest-plugin-mock": "^2.0",
+    "pestphp/pest-plugin-watch": "^2.0",
+    "phpunit/phpunit": "^10.3"
+  }
+}
