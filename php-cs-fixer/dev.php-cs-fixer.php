@@ -27,25 +27,25 @@ $config = new PhpCsFixer\Config();
 $config
     ->setRiskyAllowed(true)
     ->setRules([
-        '@PHP74Migration'                  => true,
-        '@PHPUnit75Migration:risky'        => true,
-        '@PSR2'                            => true,
-        '@PSR12'                           => true,
-        '@PhpCsFixer'                      => true,     // 'aa' . 'bb'  ->  'aa'.'bb'
-        '@PhpCsFixer:risky'                => true,
-        'general_phpdoc_annotation_remove' => ['annotations' => ['expectedDeprecation']],
-        'list_syntax'                      => ['syntax' => 'long'],
-        'self_accessor'                    => true,                                 // 在當前類中使用 self 代替類名
-        'standardize_not_equals'           => true,                                 // <> 取代為 !=
-        'phpdoc_annotation_without_dot'    => false,    // @param 註解後面不要自動加上 . 符號
-        'phpdoc_summary'                   => false,    // 文字 註解後面不要自動加上 . 符號
-        'binary_operator_spaces'           => ['default' => 'single_space'],        // 等號一律置左方
-      //'binary_operator_spaces'           => ['default' => 'align_single_space'],  // 等號對齊、數字箭頭符號對齊 -> 不符合 Kos 的規則
-        'new_with_braces'                  => [ // Migration 的名稱, `return new class()` -> `return new class`
+        '@PHP74Migration'                        => true,
+        '@PHPUnit75Migration:risky'              => true,
+        '@PSR2'                                  => true,
+        '@PSR12'                                 => true,
+        '@PhpCsFixer'                            => true,       // 'aa' . 'bb'  ->  'aa'.'bb'
+        '@PhpCsFixer:risky'                      => true,
+        'general_phpdoc_annotation_remove'       => ['annotations' => ['expectedDeprecation']],
+        'list_syntax'                            => ['syntax' => 'long'],
+        'self_accessor'                          => true,       // 在當前類中使用 self 代替類名
+        'standardize_not_equals'                 => true,       // <> 取代為 !=
+        'phpdoc_annotation_without_dot'          => false,      // @param 註解後面不要自動加上 . 符號
+        'phpdoc_summary'                         => false,      // 文字 註解後面不要自動加上 . 符號
+        'binary_operator_spaces'                 => ['default' => 'single_space'],          // 等號一律置左方
+        //'binary_operator_spaces'               => ['default' => 'align_single_space'],    // 等號對齊、數字箭頭符號對齊 -> 不符合 Kos 的規則
+        'new_with_braces'                        => [ // Migration 的名稱, `return new class()` -> `return new class`
             'named_class'     => false,
             'anonymous_class' => false,
         ],
-        'php_unit_test_class_requires_covers' => false, // 測試程式不要加上 @coversNothing 標示, 會無法產 生測試覆蓋率 report
+        'php_unit_test_class_requires_covers'    => false, // 測試程式不要加上 @coversNothing 標示, 會無法產 生測試覆蓋率 report
     ])
     ->setFinder($finder);
 
