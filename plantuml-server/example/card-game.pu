@@ -1,0 +1,78 @@
+@startuml
+
+' Generalization 擴展       <|--  類別在層次結構中的特化
+' Realization    實現       <|..  透過類別實現接口
+' Composition    組合 構成   *--   沒有整體就沒有部分
+' Aggregation    聚合       o--   部分可以獨立於整體而存在
+' Association    關聯 依賴性 -->  物件使用另一個對象
+' Dependency     依賴       ..>   一種較弱的依賴形式
+
+class AI {
+  演算法計算決策()
+}
+
+class Human {
+  網頁輸入指令()
+}
+
+class Player {
+  出牌()
+  抽牌(): Card
+  + HandCards Card[]
+  + String name
+}
+
+note top of Player
+  <b>玩家可以選擇 Human 或是 AI</b>
+end note
+
+
+Player <|-- AI
+Player <|-- Human
+
+
+
+
+class Game {
+  - currentPlayer: int
+  - roundNumber: int
+  start()
+  shuffle()
+}
+
+class Deck {
+  - cards: Card[]
+}
+
+class Card {
+  - Enum color
+  - int number
+}
+
+class GameHistory {
+  - string recordLog {Player, Card}
+}
+
+note top of GameHistory
+  <b>牌局記錄</b> 像是西洋棋, 每一步都會記錄, 清楚知道順序
+end note
+
+Player "0..1" - "0..5..*" Card
+Player "2..4" -- "1" Game
+Card "0..40" - "0..1" Deck
+Game "1" - "0..1" Deck
+Game "1" - "0..*" GameHistory
+
+
+
+
+enum Color {
+  RED
+  BLUE
+  YELLOW
+  GREEN
+}
+
+Card ---- Color
+
+@enduml

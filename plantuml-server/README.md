@@ -2,7 +2,7 @@
 
 ## install
 
-- docker-compose up
+- docker compose up
 
 ## upgrade docker image
 - https://hub.docker.com/r/plantuml/plantuml-server/tags
