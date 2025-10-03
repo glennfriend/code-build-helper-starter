@@ -5,6 +5,7 @@
 - docker compose up
 
 ## upgrade docker image
+
 - https://hub.docker.com/r/plantuml/plantuml-server/tags
 - docker pull plantuml/plantuml-server:v1.2023.13
 
@@ -16,6 +17,7 @@
 
 ## try for url
 
+- 可以在這裡儲存成圖片
 - http://127.0.0.1:8888/
 
 ## try for vscode
